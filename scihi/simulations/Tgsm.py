@@ -7,7 +7,7 @@ from matplotlib import cm
 from astropy.time import Time
 from astropy.coordinates import SkyCoord
 from astropy import units as u
-from power_to_temperature import Radio_source_trans
+from scihi.simulations.power_to_temperature import Radio_source_trans
 import copy
 
 Cmap = copy.copy(cm.get_cmap("jet"))

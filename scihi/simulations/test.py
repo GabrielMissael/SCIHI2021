@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import interpolate
 import matplotlib.pyplot as plt
-from power_to_temperature import *
+from scihi.simulations.power_to_temperature import *
 
 f_eta, p_eta = np.loadtxt('eta_nu.dat', unpack=True)
 f_eta *= 1e-6

@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import os
 import glob
-from power_to_temperature import *
-from test import *
+from scihi.simulations.power_to_temperature import *
+from scihi.simulations.test import *
 
 Freqs = np.linspace(1e-22,250,32769) # Spected range of the antenna, edit if needed.
 eta_nu = eta(Freqs) # There should be a file named eta_nu.dat in the directory with the efficiency of the antenna.

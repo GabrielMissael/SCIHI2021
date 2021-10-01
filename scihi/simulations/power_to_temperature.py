@@ -1,10 +1,13 @@
 import numpy as np
 
-k = 1.38064852e-23 #Boltzmann constant
-c = 299792458.0    #speed of light m/s
+k = 1.38064852e-23  # Boltzmann constant
+c = 299792458.0  # speed of light m/s
 
-#Transformacion de dBm's a potencia
-P = lambda source: 10.0**((source - 30.) / 10.0)
+# Transformacion de dBm's a potencia
+
+
+def P(source): return 10.0**((source - 30.) / 10.0)
+
 
 def deg2arcsec(angle):
     """
@@ -24,23 +27,24 @@ def Radio_source_trans(Radio_source, freqs, Bwidth):
         """
 
     area = 1.0           # m^2
-    angle = 55.0    #degrees
+    angle = 55.0  # degrees
     theta = deg2arcsec(angle)
 
     power = np.array(P(Radio_source), dtype=np.float64)
 
-    #the units of the flux density are W m^-2 MHz^-1
+    # the units of the flux density are W m^-2 MHz^-1
     flux = np.array((2.0 * power / area) * Bwidth, dtype=np.float64)
 
     flux_Jy = np.array(flux * 1e26, dtype=np.float64)  # Jy
-    flux_Jy = np.array(flux_Jy * 1e3, dtype=np.float64) # mJy
+    flux_Jy = np.array(flux_Jy * 1e3, dtype=np.float64)  # mJy
 
-    freq = np.array(freqs * 1e6, dtype=np.float64) #Hz
+    freq = np.array(freqs * 1e6, dtype=np.float64)  # Hz
     wavelength = np.array((c / freq) * 100., dtype=np.float64)  # cm
 
-    T = np.array(1.36 * flux_Jy  * wavelength**2 / theta**2, dtype=np.float64)
+    T = np.array(1.36 * flux_Jy * wavelength**2 / theta**2, dtype=np.float64)
 
     return T
+
 
 def Res2Temp(res_source, Bwidth):
     """

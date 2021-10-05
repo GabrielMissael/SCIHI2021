@@ -42,7 +42,7 @@ def trajectory(time, lon=-118.3011, lat=28.9733):
     return l, b
 
 
-def pattern(time, Freq, PATH="antenna_beam/", lon=-118.3011, lat=28.9733):
+def pattern(time, Freq, PATH="data/antenna_beam/", lon=-118.3011, lat=28.9733):
     """
     Calculates the beam pattern for the antenna at a given time.
     Returns an array of l and b galactic coordinates values in degrees of the antenna pattern,
@@ -94,7 +94,7 @@ def pattern(time, Freq, PATH="antenna_beam/", lon=-118.3011, lat=28.9733):
     return l, b, Temp
 
 
-def convolve(time, Freq, PATH="antenna_beam/"):
+def convolve(time, Freq, PATH="data/antenna_beam/"):
     """
     Convolves the antenna beam pattern with the gsm map of the galaxy for a given frequenacy.
     Returns the convolved temperature of the gsm.
@@ -120,7 +120,7 @@ def convolve(time, Freq, PATH="antenna_beam/"):
          Default is antenna_beam.
     """
     nside = 32
-    Data = pd.read_hdf("gsm_maps/gsm_%dMHz.hdf5" % Freq)
+    Data = pd.read_hdf("data/gsm_maps/gsm_%dMHz.hdf5" % Freq)
     bmap_gal = Data.values[:, 0]
     bmap_gal2 = hp.ud_grade(bmap_gal, nside)
     l, b, Temp = pattern(time, Freq, PATH)
@@ -131,7 +131,7 @@ def convolve(time, Freq, PATH="antenna_beam/"):
     return T_gsm
 
 
-def T_gsm(time, freqs=(50, 90), bins=20, days=1, PATH="antenna_beam/", OUTPUT='calibration'):
+def T_gsm(time, freqs=(50, 90), bins=20, days=1, PATH="data/antenna_beam/", OUTPUT='data/calibration'):
     """
     Provides a table of the convolved temperature of the GSM map with the
     Antenna beam pattern for a full day of observation, in a range of frequencies.
